@@ -20,7 +20,7 @@ function displayScore() {
 }
 
 // Function to display the choices for player and computer
-function displayChoices() {
+function displayChoices(playerChoice, computerChoice) {
   console.log(
     `Player picked ${playerChoice} : Computer picked ${computerChoice}`
   );
@@ -29,29 +29,41 @@ function displayChoices() {
 // Function to get that calculates the outcome who won
 function getOutcome(playerChoice, computerChoice) {
   if (playerChoice === computerChoice) {
-    displayChoices();
+    displayChoices(playerChoice, computerChoice);
     console.log("It's a tie!");
   } else if (playerChoice === "rock" && computerChoice === "scissors") {
-    displayChoices();
+    displayChoices(playerChoice, computerChoice);
     playerScore += 1;
     console.log("Player Wins!");
     displayScore();
   } else if (playerChoice === "paper" && computerChoice === "rock") {
-    displayChoices();
+    displayChoices(playerChoice, computerChoice);
     playerScore += 1;
     console.log("Player Wins!");
     displayScore();
   } else if (playerChoice === "scissors" && computerChoice === "paper") {
-    displayChoices();
+    displayChoices(playerChoice, computerChoice);
     playerScore += 1;
     console.log("Player Wins!");
+    displayScore();
+  } else {
+    displayChoices(playerChoice, computerChoice);
+    computerScore += 1;
+    console.log("Computer Wins!");
     displayScore();
   }
 }
 // Function to play the round
 function playRound() {
   let playerChoice = prompt("Rock, Paper, or Scissors: ");
+  playerChoice = playerChoice.toLowerCase();
   let computerChoice = getComputerChoice();
-
   getOutcome(playerChoice, computerChoice);
 }
+
+setTimeout(() => {
+  for (let i = 1; i <= 5; i++) {
+    playRound();
+    console.log("");
+  }
+}, 2000);
